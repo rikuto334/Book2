@@ -5,6 +5,9 @@
   <h2>Use info</h2>
   <p>name   <%= @book.user.name %></p>
   <p>introduction   <%= "hello" %></p>
+  <p><% if @book.user == current_user %>
+    <%= link_to "Destroy", book_path(@book), method: :delete %>
+  <% end %></p>
 </div>
 
 <div>
