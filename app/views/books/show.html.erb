@@ -5,9 +5,10 @@
   <h2>Use info</h2>
   <p>name   <%= @book.user.name %></p>
   <p>introduction   <%= "hello" %></p>
-  <p><% if @book.user == current_user %>
-    <%= link_to "Destroy", book_path(@book), method: :delete %>
-  <% end %></p>
+  <% if @book.user == current_user %>
+    <p> <%= link_to "Edit", edit_book_path(@book.id), method: :get %></p>
+    <p> <%= link_to "Destroy", book_path(@book), method: :delete %></p>
+  <% end %>
 </div>
 
 <div>
