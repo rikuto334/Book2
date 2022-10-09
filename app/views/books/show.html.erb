@@ -1,10 +1,12 @@
 <h1>Books#show</h1>
-<h1>Book detail</h1>
 
+<%= render 'users/list', user: @book.user %>
+
+<h1>Book detail</h1>
 <div>
-  <h2>Use info</h2>
-  <p>name   <%= @book.user.name %></p>
-  <p>introduction   <%= "hello" %></p>
+  <h2>User info</h2>
+<p>name   <%= @book.user.name %></p>
+  <p>introduction   <%= @book.user.introduction %></p>
   <% if @book.user == current_user %>
     <p> <%= link_to "Edit", edit_book_path(@book.id), method: :get %></p>
     <p> <%= link_to "Destroy", book_path(@book), method: :delete %></p>

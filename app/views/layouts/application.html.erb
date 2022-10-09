@@ -44,6 +44,7 @@
             </li>
 
       <%else%>
+
         <li class="nav-item">
           <%= link_to "Bookers", '/', method: :get %>
         </li>
@@ -51,7 +52,7 @@
           <%= link_to "Home", '/', method: :get %>
         </li>
         <li>
-          <%= link_to "About",'/home/about' %>
+          <%= link_to "About",about_path %>
         </li>
 
         <li>
@@ -70,27 +71,9 @@
       </nav>
 
     </header>
+
     <% if user_signed_in?  %>
-      <h2>User info</h2>
-        <div>
-          <p><%= image_tag current_user.get_profile_image %></p>
 
-          <p>name    <%=current_user.name  %></p>
-          <p>introduction     <%=current_user.introduction  %></p>
-          <p><%= link_to 'User_edit',edit_user_path(current_user.id)  %></p>
-
-        </div>
-
-          <h1>New book</h1>
-
-       <%= form_with model: @book=Book.new do |f| %>
-
-          <h4>Title</h4>
-            <%= f.text_field :title %>
-          <h4>Opinion</h4>
-            <%= f.text_area :body %>
-          <%= f.submit 'Create Book' %>
-       <% end %>
     <%end%>
 
     <%= yield %>
