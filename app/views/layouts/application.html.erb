@@ -2,11 +2,11 @@
 <html>
   <head>
     <title>Bookers2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1", maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -21,36 +21,54 @@
         <%= flash[:notice] %>
       </div>
       <% end %>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in?  %>
+            <li class="nav-item">
+              <%= link_to "Bookers", books_path, method: :get %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Home", user_path(current_user.id), method: :get %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Users", users_path, method: :get %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Books", books_path, method: :get %>
+            </li>
 
-      <% if user_signed_in?  %>
-        <li>
-          <%= link_to "Home", user_path(current_user.id), method: :get %>
-        </li>
-        <li>
-          <%= link_to "Users", users_path, method: :get %>
-        </li>
-        <li>
-          <%= link_to "Books", books_path, method: :get %>
-        </li>
-        <li>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-        </li>
+            <li class="nav-item">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+            </li>
 
       <%else%>
-      <li>
+        <li class="nav-item">
+          <%= link_to "Bookers", '/', method: :get %>
+        </li>
+        <li>
           <%= link_to "Home", '/', method: :get %>
         </li>
         <li>
-          <%= link_to "About",'/homes/about', method: :get %>
+          <%= link_to "About",'/home/about' %>
         </li>
+
         <li>
-          <%= link_to "Sign Up", new_user_registration_path %>
+          <%= link_to "Sign up", new_user_registration_path %>
 
         </li>
         <li>
           <%= link_to "Log in", new_user_session_path %>
         </li>
       <%end%>
+          </ul>
+        </div>
+        </div>
+
+
+      </nav>
+
     </header>
     <% if user_signed_in?  %>
       <h2>User info</h2>
@@ -65,7 +83,7 @@
 
           <h1>New book</h1>
 
-       <%= form_with model: @book do |f| %>
+       <%= form_with model: @book=Book.new do |f| %>
 
           <h4>Title</h4>
             <%= f.text_field :title %>
