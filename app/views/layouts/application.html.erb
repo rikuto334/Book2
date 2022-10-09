@@ -12,6 +12,16 @@
 
   <body>
     <header>
+
+
+     
+
+       <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+
       <% if user_signed_in?  %>
         <li>
           <%= link_to "Home", user_path(current_user.id), method: :get %>
