@@ -1,22 +1,29 @@
-<h1>Books#show</h1>
+ <div class="container">
+   <div class="row">
+     <%= render 'users/list', user: @book.user %>
+     <div class="col-md-8 offset-md-1">
+       <h2>Book detail</h2>
+       <table class="table">
+         <tbody>
+           <tr>
+            <td>
+              <%= image_tag @book.user.get_profile_image %> <br>
+              <%= link_to @book.user.name, user_path(@book.user.id)  %>
+            </td>
+            <td>
+              <%= @book.title %>
+            </td>
+            <td><%= @book.body %></td>
+              <% if @book.user == current_user %>
+                <td><%= link_to "Edit", edit_book_path(@book.id), method: :get %></td>
+                 <td><%= link_to "Destroy", book_path(@book), method: :delete %></td>
+              <% end %>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+   </div>
+ </div>
 
-<%= render 'users/list', user: @book.user %>
 
-<h1>Book detail</h1>
-<div>
-  <h2>User info</h2>
-<p>name   <%= @book.user.name %></p>
-  <p>introduction   <%= @book.user.introduction %></p>
-  <% if @book.user == current_user %>
-    <p> <%= link_to "Edit", edit_book_path(@book.id), method: :get %></p>
-    <p> <%= link_to "Destroy", book_path(@book), method: :delete %></p>
-  <% end %>
-</div>
 
-<div>
-  <p><%= image_tag @book.user.get_profile_image %> </p>
-  <p><%= link_to @book.user.name, user_path(@book.user.id)  %></p>
-  <p><%= @book.title %></p>
-  <p><%= @book.body %></p>
-
-</div>
